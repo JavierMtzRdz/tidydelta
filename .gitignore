@@ -16,6 +16,7 @@
 .Rproj.user
 .Rproj
 inst/
+misc/
 ^tidydelta\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$

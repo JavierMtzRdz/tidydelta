@@ -1,0 +1,80 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# tidydelta
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Delta Method implementation to estimate standard errors in a {tidyverse} workflow. 
+
+## Installation
+
+You can install the development version of tidydelta from [GitHub](https://github.com/JavierMtzRdz/tidydelta) with:
+
+``` r
+remotes::install_github("JavierMtzRdz/tidydelta")
+# Or
+devtools::install_github("JavierMtzRdz/tidydelta")	
+```
+
+## Example
+
+Using tidydelta_m(), the following commands are equivalent:
+
+```{r example}
+# Load packages
+library(tidydelta)
+library(tidyverse)
+
+# Simulate samples
+set.seed(547)
+x = rnorm(10000, mean = 5, sd = 2)
+y = rnorm(10000, mean = 15, sd = 3)
+
+bd <- tibble(x, y)
+
+# Equivalent uses of tidydelta_m()
+tidydelta_m(~ y/x,
+            conf_lev = .95)
+
+tidydelta_m(~ bd$y/bd$x,
+            conf_lev = .95)
+bd %>%
+  summarise(tidydelta_m(~ y/x,
+                        conf_lev = .95))
+```
+
+Now, the data frame is divided into samples to compare the transformation of the sample with the estimation of `tidydelta()`. In the real world, you would not need to compute the Delta Method if you have many samples, but it shows how it can be incorporated in a workflow with tidyverse. 
+
+```{r message=FALSE, warning=FALSE, fig.height=3.5, dpi=300}
+(result <- bd %>%
+  summarise(tidydelta_m(~ x/y,
+                        conf_lev = .95)))
+
+ggplot() +
+  geom_histogram(data = bd %>%
+                   mutate(t = x/y),
+                 aes(x = t)) +
+  geom_vline(aes(xintercept = result$T_n,
+                 color = "T_n")) +
+  geom_vline(aes(xintercept = c(result$lower_ci,
+                                result$upper_ci),
+                 color = "CI"),
+             linetype = "dashed") +
+  labs(color = element_blank()) +
+  theme_minimal() +
+  theme(text = element_text(family = "Times New Roman"))
+```

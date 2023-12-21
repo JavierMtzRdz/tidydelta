@@ -50,21 +50,40 @@ ext_bd_var <- function(formula) {
 }
 
 
-#' Estimate means and standard errors
+#' Delta Method implementation
 #'
-#' Estimates means and standard errors for a given formula using Monte Carlo simulation.
+#' Estimates standard errors for transformations of random variables using Delta method.
 #'
 #' @param formula A formula object specifying the variables of interest.
 #' @param normality_eval Logical value to run normality test in case of being
 #' possible.
 #' @param formula_vars The function(s) to apply to the variables in the formula.
-#' @param mean_dta Data frame containing the means of the variables.
+#' @param mean_dta Vector containing the means of the variables.
 #' @param cov_dta Covariance matrix of the variables.
 #' @param conf_lev Confidence level for confidence intervals.
-#' @param n Sample size evaluate (in case that we can evaluate the confidence
+#' @param n Sample size evaluation (in case that we can evaluate the confidence
 #' intervals with different hypnotic sample sizes).
 #'
 #' @return A tibble with columns for means, standard errors, and optionally, confidence intervals.
+#'
+#' @examples
+#' # Equivalent ways to use tidydelta_m()
+#' library(tidyverse)
+#'
+#' x = rnorm(1000, mean = 5, sd = 2)
+#' y = rnorm(1000, mean = 15, sd = 3)
+#'
+#' bd <- tibble(x, y)
+#'
+#' tidydelta_m(~ y/x,
+#'             conf_lev = .95)
+#'
+#' tidydelta_m(~ bd$y/bd$x,
+#'             conf_lev = .95)
+#' bd %>%
+#'   summarise(tidydelta_m(~ y/x,
+#'                         conf_lev = .95))
+#'
 #'
 #' @export
 tidydelta_m <- function(
