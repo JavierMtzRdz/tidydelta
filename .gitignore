@@ -16,3 +16,6 @@
 .Rproj.user
 .Rproj
 inst/
+^tidydelta\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
