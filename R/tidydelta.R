@@ -6,9 +6,6 @@
 #'
 #' @return The evaluated expression.
 #'
-#' @examples
-#' for_to_exp(~ log(x))
-#'
 for_to_exp <- function(formula) {
   if (rlang::is_formula(formula)) {
     formula <- rlang::as_label(formula)
@@ -24,9 +21,6 @@ for_to_exp <- function(formula) {
 #' @param formula A formula object or a character string representing a formula.
 #'
 #' @return A named character vector of extracted variables.
-#'
-#' @examples
-#' ext_bd_var(~ x + y)
 #'
 ext_bd_var <- function(formula) {
   if (!rlang::is_formula(formula)) {
@@ -67,6 +61,8 @@ ext_bd_var <- function(formula) {
 #' @param mean_dta Data frame containing the means of the variables.
 #' @param cov_dta Covariance matrix of the variables.
 #' @param conf_lev Confidence level for confidence intervals.
+#' @param n Sample size evaluate (in case that we can evaluate the confidence
+#' intervals with different hypnotic sample sizes).
 #'
 #' @return A tibble with columns for means, standard errors, and optionally, confidence intervals.
 #'
@@ -142,7 +138,7 @@ tidydelta_m <- function(
       } else {vars}
 
     tests <- sapply(names(vars_norm), function(x) {
-      stats::shapiro.test(as_vector(vars_norm[,x]))
+      stats::shapiro.test(purrr::as_vector(vars_norm[,x]))
     })
 
     tests_pv <- tests["p.value",]
@@ -153,10 +149,9 @@ tidydelta_m <- function(
 
   }
 
-
   # Calculate the covariance matrix if not provided                         .
   if (is.null(cov_dta)) {
-    cov_est <- if(dim(vars)[2] == 1) var(vars) else stats::cov(vars) #                         .
+    cov_est <- if(dim(vars)[2] == 1) stats::var(vars) else stats::cov(vars) #                         .
   } else {
     cov_est <- cov_dta #                         .
   }
@@ -209,15 +204,18 @@ tidydelta_m <- function(
   )
 
   # Create the result tibble                                    .
-  ret_tib <- var_mean %>%
-    bind_cols(tibble(`T_n` = transformation,
-                     se = se_res))
+  ret_tib <- dplyr::bind_cols(
+    var_mean,
+    tibble::tibble(`T_n` = transformation,
+                   se = se_res)
+  )
 
   # Optionally, calculate and add confidence intervals                                    .
   if (!is.null(conf_lev)) {
-    z <- qnorm(conf_lev + (1 - conf_lev) / 2)
-    ret_tib <- ret_tib %>%
-      bind_cols(tibble(
+    z <- stats::qnorm(conf_lev + (1 - conf_lev) / 2)
+    ret_tib <-  dplyr::bind_cols(
+      ret_tib,
+      tibble::tibble(
         lower_ci = transformation - z * se_res,
         upper_ci = transformation + z * se_res
       ))
