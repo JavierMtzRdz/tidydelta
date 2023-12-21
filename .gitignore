@@ -13,3 +13,6 @@
 *.o
 *.so
 *.DS_Store
+.Rproj.user
+.Rproj
+inst/
