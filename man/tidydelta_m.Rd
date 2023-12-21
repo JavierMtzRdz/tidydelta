@@ -37,3 +37,23 @@ A tibble with columns for means, standard errors, and optionally, confidence int
 \description{
 Estimates means and standard errors for a given formula using Monte Carlo simulation.
 }
+\examples{
+# Equivalent ways to use tidydelta_m()
+library(tidyverse)
+
+x = rnorm(1000, mean = 5, sd = 2)
+y = rnorm(1000, mean = 15, sd = 3)
+
+bd <- tibble(x, y)
+
+tidydelta_m(~ y/x,
+            conf_lev = .95)
+
+tidydelta_m(~ bd$y/bd$x,
+            conf_lev = .95)
+bd \%>\%
+  summarise(tidydelta_m(~ y/x,
+                        conf_lev = .95))
+
+
+}
