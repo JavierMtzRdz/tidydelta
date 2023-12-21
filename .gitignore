@@ -15,4 +15,4 @@
 *.DS_Store
 .Rproj.user
 .Rproj
-Inst/
+inst/
