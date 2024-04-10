@@ -1,5 +1,6 @@
 ---
 output: github_document
+bibliography: misc/STAT_547C.bib
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -11,6 +12,16 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+## Packages to use ----
+pacman::p_load(tidyverse, janitor, writexl, 
+              readxl, scales, mytidyfunctions)
+
+## Set theme ------
+theme_set(theme_jmr(text = element_text(family = "Times New Roman")))
+
+options(ggplot2.discrete.colour = c("#277DA1", "#f94144", "#F9C74F", "#43AA8B"),
+        ggplot2.discrete.fill = c("#277DA1", "#f94144", "#F9C74F", "#43AA8B"))
 ```
 
 # tidydelta
@@ -29,6 +40,39 @@ remotes::install_github("JavierMtzRdz/tidydelta")
 # Or
 devtools::install_github("JavierMtzRdz/tidydelta")	
 ```
+
+## Theoretical Background
+
+In general terms, the Delta Method provides a tool for approximating the behaviour of an estimator $\phi(T_n)$ using Taylor Expansion, where $T_n$ is an estimator of a parameter $\theta$, and $\phi$ is a function. To derive this result, we should begin with the observation that, according to the continuous mapping theorem, if $T_n \xrightarrow{\mathbb{P}} \theta$ implies $\phi(T_n) \xrightarrow{\mathbb{P}} \phi(\theta)$ assuming that $\phi$ is a continuous function [@Vaart:2000a, p.25].
+
+This observation allows us to take a step forward to decompose the theorem of the DM. Assuming that $\phi$ is not only continuous but also differentiable and further assuming that $\sqrt{n} (T_n - \theta)$ converges in distribution to a  variable $T$ as the sample size $n$ increases, [@Bouchard-Cote:2023, p.87] we can employ Taylor Expansion to show that 
+\begin{align}
+\sqrt{n} (\phi(T_n) - \phi(\theta)) \approx \phi'(\theta)\sqrt{n} (T_n - \theta).
+\end{align}
+Now, as the sample size $n$ becomes larger, the expression $\sqrt{n} (\phi(T_n) - \phi(\theta))$ converges in distribution to $\phi'(\theta)T$ [@Vaart:2000a, p. 25; @Bouchard-Cote:2023]. 
+
+Given the previous result, we can rearrange the equations to show that 
+\begin{align}
+\sqrt{n} (\phi(T_n) - \phi(\theta)) \sim N(0, \phi'(\theta)^2\sigma^2)
+\end{align}
+
+as $n$ grows larger. For this reason, it is not a surprise that one of the primary uses of the Delta Method is to approximate the variance of transformations of estimators. 
+
+
+### The Multivariate Case
+
+We often encounter scenarios where our $\theta$ can be expressed as a function of more than one parameter. For instance, we may be interested in the transformation $\phi$ of $\theta = (\theta_1, \ldots, \theta_k)$ [@Zepeda-TelloSchomakerMaringe:2022]. In this case, we are dealing with a multivariate parameter space and the estimator $T_{n,k} = (Y_{n,1}, \ldots, Y_{n,k})$ becomes a random vector. Consequently, the asymptotic behaviour of the estimator $T_{n,k}$ can be seen as follows [@Weisberg:2005, pp. 79-80]
+\begin{align}
+\sqrt{n} (T_{n,k} - \theta) \leadsto N(0, \Sigma).
+\end{align}
+
+To approximate this scenario using the Delta Method, we need to compute the vector of all partial derivatives of $\phi(\theta)$ with respect to each parameter $\theta_1, \ldots, \theta_k$. This vector is denoted as $\nabla \phi$. 
+With this vector, we can extend the Delta Method to the multivariate case stating that asymptotically
+\begin{align}
+\sqrt{n} (\phi(T_{n,k}) - \phi(\theta)) \leadsto N(0, \nabla_{\theta}^\top\Sigma \nabla_{\theta}).
+\end{align}
+In this equation, $\nabla_{\theta}^\top$ represents the transpose of the gradient vector $\nabla \phi$, and $\Sigma$ is the covariance matrix of the random vector $T_{nk}$ [@Weisberg:2005, pp. 79-80].From this, we obtain that $se(\theta) = \sqrt{\nabla_{\theta}^\top\Sigma \nabla_{\theta}}$, which constitutes the function that is being implemented in this project. 
+
 
 ## Example
 
@@ -74,7 +118,8 @@ ggplot() +
                                 result$upper_ci),
                  color = "CI"),
              linetype = "dashed") +
-  labs(color = element_blank()) +
-  theme_minimal() +
-  theme(text = element_text(family = "Times New Roman"))
+  labs(color = element_blank()) 
 ```
+
+
+## References
