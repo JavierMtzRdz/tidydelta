@@ -36,11 +36,21 @@ theorem of the DM. Assuming that $\phi$ is not only continuous but also
 differentiable and further assuming that $\sqrt{n} (T_n - \theta)$
 converges in distribution to a variable $T$ as the sample size $n$
 increases, (Bouchard-Côté n.d., 87) we can employ Taylor Expansion to
-show that Now, as the sample size $n$ becomes larger, the expression
+show that
+
+$$
+\sqrt{n} (\phi(T_n) - \phi(\theta)) \approx \phi'(\theta)\sqrt{n} (T_n - \theta).
+$$
+
+Now, as the sample size $n$ becomes larger, the expression
 $\sqrt{n} (\phi(T_n) - \phi(\theta))$ converges in distribution to
 $\phi'(\theta)T$ (Vaart 2000, 25; Bouchard-Côté n.d.).
 
 Given the previous result, we can rearrange the equations to show that
+
+$$
+\sqrt{n} (\phi(T_n) - \phi(\theta)) \sim N(0, \phi'(\theta)^2\sigma^2)
+$$
 
 as $n$ grows larger. For this reason, it is not a surprise that one of
 the primary uses of the Delta Method is to approximate the variance of
@@ -55,16 +65,20 @@ in the transformation $\phi$ of $\theta = (\theta_1, \ldots, \theta_k)$
 multivariate parameter space and the estimator
 $T_{n,k} = (Y_{n,1}, \ldots, Y_{n,k})$ becomes a random vector.
 Consequently, the asymptotic behaviour of the estimator $T_{n,k}$ can be
-seen as follows (Weisberg 2005, 79–80)
+seen as follows (Weisberg 2005, 79–80) $$
+\sqrt{n} (T_{n,k} - \theta) \leadsto N(0, \Sigma).
+$$
 
 To approximate this scenario using the Delta Method, we need to compute
 the vector of all partial derivatives of $\phi(\theta)$ with respect to
 each parameter $\theta_1, \ldots, \theta_k$. This vector is denoted as
 $\nabla \phi$. With this vector, we can extend the Delta Method to the
-multivariate case stating that asymptotically In this equation,
-$\nabla_{\theta}^\top$ represents the transpose of the gradient vector
-$\nabla \phi$, and $\Sigma$ is the covariance matrix of the random
-vector $T_{nk}$ (Weisberg 2005, 79–80).From this, we obtain that
+multivariate case stating that asymptotically $$
+\sqrt{n} (\phi(T_{n,k}) - \phi(\theta)) \leadsto N(0, \nabla_{\theta}^\top\Sigma \nabla_{\theta}).
+$$ In this equation, $\nabla_{\theta}^\top$ represents the transpose of
+the gradient vector $\nabla \phi$, and $\Sigma$ is the covariance matrix
+of the random vector $T_{nk}$ (Weisberg 2005, 79–80).From this, we
+obtain that
 $se(\theta) = \sqrt{\nabla_{\theta}^\top\Sigma \nabla_{\theta}}$, which
 constitutes the function that is being implemented in this project.
 
