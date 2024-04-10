@@ -65,7 +65,9 @@ in the transformation $\phi$ of $\theta = (\theta_1, \ldots, \theta_k)$
 multivariate parameter space and the estimator
 $T_{n,k} = (Y_{n,1}, \ldots, Y_{n,k})$ becomes a random vector.
 Consequently, the asymptotic behaviour of the estimator $T_{n,k}$ can be
-seen as follows (Weisberg 2005, 79–80) $$
+seen as follows (Weisberg 2005, 79–80)
+
+$$
 \sqrt{n} (T_{n,k} - \theta) \leadsto N(0, \Sigma).
 $$
 
