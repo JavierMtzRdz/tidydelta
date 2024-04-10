@@ -72,9 +72,11 @@ $$
 
 To approximate this scenario using the Delta Method, we need to compute the vector of all partial derivatives of $\phi(\theta)$ with respect to each parameter $\theta_1, \ldots, \theta_k$. This vector is denoted as $\nabla \phi$. 
 With this vector, we can extend the Delta Method to the multivariate case stating that asymptotically
+
 $$
 \sqrt{n} (\phi(T_{n,k}) - \phi(\theta)) \leadsto N(0, \nabla_{\theta}^\top\Sigma \nabla_{\theta}).
 $$
+
 In this equation, $\nabla_{\theta}^\top$ represents the transpose of the gradient vector $\nabla \phi$, and $\Sigma$ is the covariance matrix of the random vector $T_{nk}$ [@Weisberg:2005, pp. 79-80].From this, we obtain that $se(\theta) = \sqrt{\nabla_{\theta}^\top\Sigma \nabla_{\theta}}$, which constitutes the function that is being implemented in this project. 
 
 
