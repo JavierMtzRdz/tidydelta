@@ -1,6 +1,6 @@
 Package: tidydelta
 Title: Estimation of standard errors using Delta Method
-Version: 1.0.0
+Version: 0.1.0
 Authors@R: 
     person("Javier", "Martinez-Rodriguez", , "javier.mr@stat.ubc.ca", 
     role = c("aut", "cre"))
