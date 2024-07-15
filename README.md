@@ -180,7 +180,6 @@ entry-spacing="0">
 
 Bouchard-Côté, Alexandre. n.d. *Probability, Illustrated*. Accessed
 October 25, 2023.
-<https://github.com/alexandrebouchard/probability-illustrated/blob/master/document.pdf>.
 
 </div>
 
@@ -194,7 +193,7 @@ Statistical and Probabilistic Mathematics. Cambridge University Press.
 <div id="ref-Weisberg:2005" class="csl-entry">
 
 Weisberg, Sanford. 2005. *Applied Linear Regression*. 3rd ed. Hoboken
-NJ: Wiley. <http://www.stat.umn.edu/alr>.
+NJ: Wiley.
 
 </div>
 
@@ -203,8 +202,8 @@ NJ: Wiley. <http://www.stat.umn.edu/alr>.
 Zepeda-Tello, Rodrigo, Michael Schomaker, Camille Maringe, Matthew J.
 Smith, Aurelien Belot, Bernard Rachet, Mireille E. Schnitzer, and Miguel
 Angel Luque-Fernandez. 2022. “The Delta-Method and Influence Function in
-Medical Statistics: A Reproducible Tutorial.” June 30, 2022.
-<http://arxiv.org/abs/2206.15310>.
+Medical Statistics: A Reproducible Tutorial.” arXiv.
+<https://arxiv.org/abs/2206.15310>.
 
 </div>
 
