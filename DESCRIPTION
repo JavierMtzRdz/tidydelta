@@ -2,7 +2,7 @@ Package: tidydelta
 Title: Estimation of standard errors using Delta Method
 Version: 0.1.0
 Authors@R: 
-    person("Javier", "Martinez-Rodriguez", , "javier.mr@stat.ubc.ca", 
+    person("Javier", "Martinez-Rodriguez", , "javier.matz.rdz@gmail.com", 
     role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE

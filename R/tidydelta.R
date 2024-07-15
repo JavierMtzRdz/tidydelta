@@ -135,10 +135,11 @@ cases_ext <- function(formula,
     ))
   }
   if (all(vars_names != "$") && is.null(mean_dta)) {
+    env_pl <- where_env(vars_select)
     vars <- tibble::as_tibble(
-      rlang::env_get_list(
-        nm = vars_select,
-        inherit = TRUE
+      mget(vars_select,
+           inherits = TRUE,
+           envir = env_pl
       )
     )
 
