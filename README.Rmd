@@ -14,14 +14,18 @@ knitr::opts_chunk$set(
 )
 
 ## Packages to use ----
-pacman::p_load(tidyverse, janitor, writexl, 
-              readxl, scales, mytidyfunctions)
+pacman::p_load(
+  tidyverse, janitor, writexl,
+  readxl, scales, mytidyfunctions
+)
 
 ## Set theme ------
 theme_set(theme_jmr(text = element_text(family = "Times New Roman")))
 
-options(ggplot2.discrete.colour = c("#277DA1", "#f94144", "#F9C74F", "#43AA8B"),
-        ggplot2.discrete.fill = c("#277DA1", "#f94144", "#F9C74F", "#43AA8B"))
+options(
+  ggplot2.discrete.colour = c("#277DA1", "#f94144", "#F9C74F", "#43AA8B"),
+  ggplot2.discrete.fill = c("#277DA1", "#f94144", "#F9C74F", "#43AA8B")
+)
 ```
 
 # tidydelta
@@ -82,7 +86,7 @@ In this equation, $\nabla_{\theta}^\top$ represents the transpose of the gradien
 
 ## Example
 
-Using tidydelta_m(), the following commands are equivalent:
+Using tidydelta(), the following commands are equivalent:
 
 ```{r example}
 # Load packages
@@ -91,40 +95,54 @@ library(tidyverse)
 
 # Simulate samples
 set.seed(547)
-x = rnorm(10000, mean = 5, sd = 2)
-y = rnorm(10000, mean = 15, sd = 3)
+x <- rnorm(10000, mean = 5, sd = 2)
+y <- rnorm(10000, mean = 15, sd = 3)
 
 bd <- tibble(x, y)
 
-# Equivalent uses of tidydelta_m()
-tidydelta_m(~ y/x,
-            conf_lev = .95)
+# Equivalent uses of tidydelta()
+tidydelta(~ y / x,
+  conf_lev = .95
+)
 
-tidydelta_m(~ bd$y/bd$x,
-            conf_lev = .95)
+tidydelta(~ bd$y / bd$x,
+  conf_lev = .95
+)
 bd %>%
-  summarise(tidydelta_m(~ y/x,
-                        conf_lev = .95))
+  summarise(tidydelta(~ y / x,
+    conf_lev = .95
+  ))
 ```
 
 Now, the data frame is divided into samples to compare the transformation of the sample with the estimation of `tidydelta()`. In the real world, you would not need to compute the Delta Method if you have many samples, but it shows how it can be incorporated in a workflow with tidyverse. 
 
 ```{r message=FALSE, warning=FALSE, fig.height=3.5, dpi=300}
 (result <- bd %>%
-  summarise(tidydelta_m(~ x/y,
-                        conf_lev = .95)))
+  summarise(tidydelta(~ x / y,
+    conf_lev = .95
+  )))
 
 ggplot() +
-  geom_histogram(data = bd %>%
-                   mutate(t = x/y),
-                 aes(x = t)) +
-  geom_vline(aes(xintercept = result$T_n,
-                 color = "T_n")) +
-  geom_vline(aes(xintercept = c(result$lower_ci,
-                                result$upper_ci),
-                 color = "CI"),
-             linetype = "dashed") +
-  labs(color = element_blank()) 
+  geom_histogram(
+    data = bd %>%
+      mutate(t = x / y),
+    aes(x = t)
+  ) +
+  geom_vline(aes(
+    xintercept = result$T_n,
+    color = "T_n"
+  )) +
+  geom_vline(
+    aes(
+      xintercept = c(
+        result$lower_ci,
+        result$upper_ci
+      ),
+      color = "CI"
+    ),
+    linetype = "dashed"
+  ) +
+  labs(color = element_blank())
 ```
 
 
