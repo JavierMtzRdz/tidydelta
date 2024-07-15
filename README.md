@@ -90,7 +90,7 @@ project.
 
 ## Example
 
-Using tidydelta_m(), the following commands are equivalent:
+Using tidydelta(), the following commands are equivalent:
 
 ``` r
 # Load packages
@@ -99,28 +99,31 @@ library(tidyverse)
 
 # Simulate samples
 set.seed(547)
-x = rnorm(10000, mean = 5, sd = 2)
-y = rnorm(10000, mean = 15, sd = 3)
+x <- rnorm(10000, mean = 5, sd = 2)
+y <- rnorm(10000, mean = 15, sd = 3)
 
 bd <- tibble(x, y)
 
-# Equivalent uses of tidydelta_m()
-tidydelta_m(~ y/x,
-            conf_lev = .95)
+# Equivalent uses of tidydelta()
+tidydelta(~ y / x,
+  conf_lev = .95
+)
 #> # A tibble: 1 × 6
 #>       y     x   T_n    se lower_ci upper_ci
 #>   <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
 #> 1  15.0  5.02  2.99  1.33    0.378     5.61
 
-tidydelta_m(~ bd$y/bd$x,
-            conf_lev = .95)
+tidydelta(~ bd$y / bd$x,
+  conf_lev = .95
+)
 #> # A tibble: 1 × 6
 #>       y     x   T_n    se lower_ci upper_ci
 #>   <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
 #> 1  15.0  5.02  2.99  1.33    0.378     5.61
 bd %>%
-  summarise(tidydelta_m(~ y/x,
-                        conf_lev = .95))
+  summarise(tidydelta(~ y / x,
+    conf_lev = .95
+  ))
 #> # A tibble: 1 × 6
 #>       y     x   T_n    se lower_ci upper_ci
 #>   <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
@@ -135,31 +138,43 @@ with tidyverse.
 
 ``` r
 (result <- bd %>%
-  summarise(tidydelta_m(~ x/y,
-                        conf_lev = .95)))
+  summarise(tidydelta(~ x / y,
+    conf_lev = .95
+  )))
 #> # A tibble: 1 × 6
 #>       x     y   T_n    se lower_ci upper_ci
 #>   <dbl> <dbl> <dbl> <dbl>    <dbl>    <dbl>
 #> 1  5.02  15.0 0.334 0.149   0.0422    0.626
 
 ggplot() +
-  geom_histogram(data = bd %>%
-                   mutate(t = x/y),
-                 aes(x = t)) +
-  geom_vline(aes(xintercept = result$T_n,
-                 color = "T_n")) +
-  geom_vline(aes(xintercept = c(result$lower_ci,
-                                result$upper_ci),
-                 color = "CI"),
-             linetype = "dashed") +
-  labs(color = element_blank()) 
+  geom_histogram(
+    data = bd %>%
+      mutate(t = x / y),
+    aes(x = t)
+  ) +
+  geom_vline(aes(
+    xintercept = result$T_n,
+    color = "T_n"
+  )) +
+  geom_vline(
+    aes(
+      xintercept = c(
+        result$lower_ci,
+        result$upper_ci
+      ),
+      color = "CI"
+    ),
+    linetype = "dashed"
+  ) +
+  labs(color = element_blank())
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-Bouchard-Cote:2023" class="csl-entry">
 

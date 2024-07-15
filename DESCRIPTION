@@ -1,6 +1,6 @@
 Package: tidydelta
 Title: Estimation of standard errors using Delta Method
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: 
     person("Javier", "Martinez-Rodriguez", , "javier.mr@stat.ubc.ca", 
     role = c("aut", "cre"))
@@ -11,9 +11,12 @@ Imports:
     numDeriv, 
     purrr,
     rlang, 
-    tibble
+    tibble,
+    cli
 Suggests:
+    testthat (>= 3.0.0),
     tidyverse
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
+Config/testthat/edition: 3
