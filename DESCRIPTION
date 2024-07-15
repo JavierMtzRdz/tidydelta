@@ -4,7 +4,7 @@ Version: 0.1.0
 Authors@R: 
     person("Javier", "Martinez-Rodriguez", , "javier.matz.rdz@gmail.com", 
     role = c("aut", "cre", "cph"))
-Description: What the package does (one paragraph).
+Description: Delta Method implementation to estimate standard errors in a {tidyverse} workflow.
 License: MIT + file LICENSE
 Imports:
     dplyr, 

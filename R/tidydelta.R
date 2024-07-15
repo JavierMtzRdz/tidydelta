@@ -138,8 +138,8 @@ cases_ext <- function(formula,
     env_pl <- where_env(vars_select)
     vars <- tibble::as_tibble(
       mget(vars_select,
-           inherits = TRUE,
-           envir = env_pl
+        inherits = TRUE,
+        envir = env_pl
       )
     )
 
