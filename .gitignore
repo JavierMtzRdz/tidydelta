@@ -19,3 +19,4 @@ inst/
 misc/
 ^tidydelta\.Rproj$
 ^\.Rproj\.user$
+^cran-comments\.md$
