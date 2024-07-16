@@ -4,7 +4,11 @@ Version: 0.1.0
 Authors@R: 
     person("Javier", "Martinez-Rodriguez", , "javier.matz.rdz@gmail.com", 
     role = c("aut", "cre", "cph"))
-Description: Delta Method implementation to estimate standard errors in a {tidyverse} workflow.
+Description: Delta Method implementation to estimate standard errors with known 
+    asymptotic properties within the 'tidyverse' workflow. The Delta Method is a
+    statistical tool that approximates an estimator’s behaviour using a Taylor 
+    Expansion. For a comprehensive explanation, please refer to Chapter 3 of van
+    der Vaart (1998, ISBN: 9780511802256).
 License: MIT + file LICENSE
 Imports:
     dplyr, 
