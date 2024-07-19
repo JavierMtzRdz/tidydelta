@@ -1,4 +1,7 @@
 url: https://javiermtzrdz.github.io/tidydelta/
 template:
   bootstrap: 5
+include-in-header:
+- text: <link rel = "shortcut icon" href = "https://raw.githubusercontent.com/JavierMtzRdz/JavierMtzRdz.github.io/gh-pages/assets/img/logo.ico"
+    />
 
