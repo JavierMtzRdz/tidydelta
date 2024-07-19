@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidydelta <a href="https://javiermtzrdz.github.io/tidydelta/"><img src="man/figures/logo-tidydelta.png" align="right" height="138" /></a>
+# tidydelta <a href="https://javiermtzrdz.github.io/tidydelta/"><img src="man/figures/logo-tidydelta.png" align="right" height="138" width="138" /></a>
 
 <!-- badges: start -->
 
