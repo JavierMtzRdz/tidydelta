@@ -1,9 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidydelta
+# tidydelta <a href="https://javiermtzrdz.github.io/tidydelta/"><img src="man/figures/logo-tidydelta.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tidydelta)](https://CRAN.R-project.org/package=tidydelta)
+[![R-CMD-check](https://github.com/JavierMtzRdz/tidydelta/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JavierMtzRdz/tidydelta/actions/workflows/R-CMD-check.yaml)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 Delta Method implementation to estimate standard errors in a {tidyverse}
@@ -11,8 +19,16 @@ workflow.
 
 ## Installation
 
-You can install the development version of tidydelta from
-[GitHub](https://github.com/JavierMtzRdz/tidydelta) with:
+You can install the stable version from the
+[CRAN](https://cran.r-project.org/web/packages/tidydelta/index.html)
+with
+
+``` r
+install.packages("dplyr")
+```
+
+Or the development version from
+[GitHub](https://github.com/JavierMtzRdz/tidydelta) with
 
 ``` r
 remotes::install_github("JavierMtzRdz/tidydelta")
@@ -88,9 +104,9 @@ that $se(\theta) = \sqrt{\nabla_{\theta}^\top\Sigma \nabla_{\theta}}$,
 which constitutes the function that is being implemented in this
 project.
 
-## Example
+## Examples
 
-Using tidydelta(), the following commands are equivalent:
+Using `tidydelta()`, the following commands are equivalent:
 
 ``` r
 # Load packages
